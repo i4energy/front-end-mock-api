@@ -117,7 +117,7 @@ export const publishLiveMqttData = () => {
 
   liveDataTimeout = setTimeout(() => {
     publishLiveMqttData()
-  }, 2000)
+  }, 1000)
 };
 
 export const publishInfoMqttData = () => {
