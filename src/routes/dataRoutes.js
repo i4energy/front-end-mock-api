@@ -5,6 +5,6 @@ const router = express.Router();
 
 router.post("/period_data", getPeriodData);
 router.post("/alerter_period_data", getAlerterPeriodData);
-router.get("/alerter_info", getAlerterInfoData);
+router.get("/alerter_ids", getAlerterInfoData);
 
 export default router;

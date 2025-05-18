@@ -77,6 +77,10 @@ export const getAlerterPeriodData = async (req, res) => {
     const databaseDocs = displayType === "events-table" ? getMockEventDocs() : getMockAlertDocs();
     const triggeredData = generateMockAlerterData(databaseDocs, startTime, endTime, displayType);
 
+    if(filters. displayType === 'alerts-notification') {
+      return res.status(200).json({ data: [triggeredData[0]], dataMaxLength: triggeredData.length });
+    }
+
     const { page = 0, pageSize = 100 } = pagination;
     if(!pagination) {
       return res.status(200).json({ data: triggeredData, dataMaxLength: triggeredData.length });
@@ -97,10 +101,10 @@ export const getAlerterInfoData = async (req, res) => {
   try {
     const alertDocs = getMockAlertDocs();
     const eventDocs = getMockEventDocs();
-    const categoryNames = {};
-    const severityNames = {};
+    const alertIDs = alertDocs.map(obj => obj.id);
+    const eventIDs = eventDocs.map(obj => obj.id);
 
-    return res.status(200).json({ alertDocs, eventDocs, categoryNames, severityNames });
+    return res.status(200).json({ alertIDs, eventIDs });
   } catch (error) {
     console.error("[getAlerterInfoData] Error:", error);
     res.status(500).json({ message: "Server Error", error: error.message });
